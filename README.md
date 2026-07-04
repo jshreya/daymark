@@ -9,13 +9,6 @@ Built as a hands-on exercise in AI-assisted engineering: using an AI pair
 programmer for implementation while making the architecture, scope, and
 trade-off calls myself.
 
-## Why this exists
-
-I wanted a project that let me talk concretely, in interviews, about *how*
-I use AI to build software — not just that I use it. That meant treating
-the AI as a fast implementer of decisions I'd already made, not as the
-decision-maker. The interesting parts of this project are the constraints
-I ran into and the calls I made around them (see **Design decisions** below).
 
 ## Features
 
