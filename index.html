@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Daymark</title>
+  <meta name="description" content="A quiet place to set your daily intentions and stay mindful of them." />
+
+  <!-- PWA metadata -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#171B24" />
+
+  <!-- iOS-specific PWA support (Safari does not fully honor manifest.json) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Daymark" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+  <link rel="icon" href="icons/icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div id="day-arc" class="day-arc" aria-hidden="true"></div>
+      <div class="header-row">
+        <h1 id="date-heading" class="date-heading">—</h1>
+        <button id="settings-btn" class="icon-btn" aria-label="Settings">⚙</button>
+      </div>
+      <p id="pending-banner" class="pending-banner hidden"></p>
+    </header>
+
+    <main class="app-main">
+      <section id="carried-section" class="section hidden">
+        <h2 class="section-title">Carried over</h2>
+        <ul id="carried-list" class="goal-list"></ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Today</h2>
+        <p id="empty-state" class="empty-state hidden">
+          Nothing here yet. Add an intention for the day below.
+        </p>
+        <ul id="today-list" class="goal-list"></ul>
+      </section>
+    </main>
+
+    <footer class="quick-add">
+      <input
+        id="quick-add-input"
+        type="text"
+        placeholder="Add a goal for today…"
+        aria-label="Add a goal for today"
+        autocomplete="off"
+      />
+      <button id="quick-add-btn" class="primary-btn" aria-label="Add goal">+</button>
+    </footer>
+  </div>
+
+  <!-- Morning check-in modal -->
+  <div id="checkin-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2 class="modal-title">Good morning.</h2>
+      <p class="modal-subtitle">A moment before the day gets going.</p>
+
+      <h3 class="modal-section-label">From before</h3>
+      <ul id="checkin-carried-list" class="goal-list"></ul>
+
+      <h3 class="modal-section-label">Today's intentions</h3>
+      <ul id="checkin-new-goals" class="goal-list"></ul>
+      <div class="checkin-input-row">
+        <input
+          id="checkin-input"
+          type="text"
+          placeholder="What matters today?"
+          aria-label="Add a goal"
+          autocomplete="off"
+        />
+        <button id="checkin-add-btn" class="secondary-btn">Add</button>
+      </div>
+
+      <button id="checkin-done-btn" class="primary-btn full-width">Start the day</button>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2 class="modal-title">Settings</h2>
+
+      <div class="setting-row">
+        <label for="notif-toggle">Reminders</label>
+        <input type="checkbox" id="notif-toggle" />
+      </div>
+      <p id="notif-status" class="setting-note"></p>
+
+      <div class="setting-row">
+        <label for="interval-select">Remind me every</label>
+        <select id="interval-select">
+          <option value="1">1 hour</option>
+          <option value="2">2 hours</option>
+          <option value="3">3 hours</option>
+          <option value="4">4 hours</option>
+        </select>
+      </div>
+
+      <p class="setting-note settings-disclaimer">
+        Reminders fire while Daymark is open. On iPhone, Safari doesn't allow
+        background reminders without a push server — opening the app is what
+        triggers the check.
+      </p>
+
+      <button id="settings-close" class="primary-btn full-width">Close</button>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
